@@ -43,7 +43,7 @@ export class AnalysisService {
     }
 
     if (dto.scan_status) {
-      query.andWhere('coreResult.status = :status', {
+      query.andWhere('coreResult.primaryScanStatus = :status', {
         status: dto.scan_status,
       });
     }

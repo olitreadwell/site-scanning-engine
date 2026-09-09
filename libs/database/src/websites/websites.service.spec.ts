@@ -4,6 +4,7 @@ import { Website } from 'entities/website.entity';
 import { mock } from 'jest-mock-extended';
 import { DeleteQueryBuilder, Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateWebsiteDto } from './dto/create-website.dto';
+import { ScanStatus } from 'entities/scan-status';
 import { WebsiteService } from './websites.service';
 
 describe('WebsiteService', () => {
@@ -114,5 +115,33 @@ describe('WebsiteService', () => {
 
     await service.deleteBefore(date);
     expect(mockRepository.delete.toHaveBeenCalled);
+  });
+
+  describe('paginatedFilter', () => {
+    it('filters by scan_status against the primary scan status column', async () => {
+      mockQB.innerJoinAndSelect.mockReturnThis();
+      mockQB.leftJoinAndSelect.mockReturnThis();
+      mockQB.andWhere.mockReturnThis();
+      mockQB.orderBy.mockReturnThis();
+      mockQB.take.mockReturnThis();
+      mockQB.skip.mockReturnThis();
+      mockQB.limit.mockReturnThis();
+      mockQB.offset.mockReturnThis();
+      mockQB.cache.mockReturnThis();
+      mockQB.getMany.mockResolvedValue([]);
+      mockRepository.createQueryBuilder.mockReturnValue(mockQB);
+
+      await service.paginatedFilter(
+        {
+          scan_status: ScanStatus.Completed,
+        },
+        { page: 1, limit: 10, route: '/websites', countQueries: false },
+      );
+
+      expect(mockQB.andWhere).toHaveBeenCalledWith(
+        'coreResult.primaryScanStatus = :status',
+        { status: ScanStatus.Completed },
+      );
+    });
   });
 });
