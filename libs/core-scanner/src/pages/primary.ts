@@ -130,6 +130,15 @@ const primaryScan = async (
     url,
   );
 
+  const wrappedUrlScanResult = runScan(
+    input,
+    pageLogger,
+    (stepLogger, page, response) =>
+      buildUrlScanResult(input, page, response, stepLogger),
+    'UrlScan',
+    url,
+  );
+
   const [
     urlScan,
     dapScan,
@@ -145,7 +154,7 @@ const primaryScan = async (
     mobileScan,
     toolingScan,
   ] = await promiseAll([
-    buildUrlScanResult(input, page, response, pageLogger),
+    wrappedUrlScanResult(page, response),
     wrappedDapResult(getOutboundRequests(), page),
     wrappedThirdPartyResult(response, getOutboundRequests()),
     wrappedCookieResult(page),
