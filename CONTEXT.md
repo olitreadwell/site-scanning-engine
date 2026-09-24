@@ -1,5 +1,5 @@
 # GSA/site-scanning-engine context
-> refreshed 2026-09-09 | upstream default: main @ 3845a8228b2ecc6c233f643f3c7807cd48b8db62
+> refreshed 2026-09-24 | upstream default: main @ 3845a8228b2ecc6c233f643f3c7807cd48b8db62
 
 ## Identity & policies
 - upstream: GSA/site-scanning-engine, default branch main, primary language TypeScript (NestJS monorepo), English-first (yes).
@@ -33,6 +33,9 @@
 - 2026-08-26 dap empty-version crash (candidate.version null/'' + Any-DAP-Match lowest priority) — outcome pr-opened (fork PR #1, branch fix/dap-empty-version-check) — verified tsc/lint/prettier + dap.spec green.
 
 - 2026-09-09 self-found bug: `scan_status` filter queries phantom `coreResult.status` column (real column is `core_result.primary_scan_status`) in libs/database/src/websites/websites.service.ts + libs/database/src/analysis/analysis.service.ts — outcome pr-opened (fork PR #3, branch fix/scan-status-filter-column, commit f71cbb0) — verified tsc/eslint/prettier clean + targeted jest green + build:api compiles. Both DTOs advertise the filter; any use threw 'column coreResult.status does not exist'. No upstream issue/PR ever reported it (only closed PR #45 introduced the line).
+
+- 2026-09-24 self-found bug: `BrowserService.processPage` (libs/browser/src/browser.service.ts) arms a 120s `setTimeout` in the promise executor and never `clearTimeout`s it, so a dead timer (holding the promise settle fn + page ref) stays queued for 120s after every page settles early. Distinct from upstream PR #585 (reject value/classification — different concern) and #586; PR #585 doesn't touch the timer lifecycle. — outcome pr-opened (fork PR #6, branch fix/process-page-timer-leak, commit 105d682) — verified failing-test-first (jest.getTimerCount()===1 on main, ===0 after fix), tsc/prettier/eslint clean, local jest green, build:all green, fork CI (build) + Scan + semgrep green, deploy red = fork secrets.
+(Initial PR #5 was created a draft and couldn't be un-drafted via API with this token type; closed it and reopened as non-draft PR #6 — PR #5 is a closed stub.)
 
 ## Mined gaps (discovered, not yet attempted)
 - 2026-09-09 bug-fix: primary.ts calls `buildUrlScanResult(input, page, response, pageLogger)` directly in promiseAll, the ONLY scan not wrapped in the local `runScan` error-swallowing helper. If it throws, `Promise.all` rejects and the whole primary page fails instead of producing `urlScan:null` (which CoreResultService already null-guards). — status: attempted (pr-opened, fork PR #4)
