@@ -29,6 +29,7 @@
   - #1989 re-enable disabled primary.spec.ts hermetically -> UNCLAIMED (large, hard to make hermetic because primaryScan calls page.goto(url) itself).
 
 ## Gap ledger (dedupe — READ FIRST, never re-pick)
+- 2026-09-25 trivial/minor-fix docs cleanup (loop-trivial): typo/broken-command fixes across 5 markdown files — README (`seperately`->`separately`, closed `nvm` bullet paren, dropped stray article `a local passwords`), docs/deployment.md (closed command-substitution paren in `cd "$(git rev-parse --show-toplevel)"`, continued `docker run` line after `--tty`), docs/development.md (stale `test:no-e2e` -> `test:unit`), apps/scan-engine/README.md (`Core-Scaner`->`Core-Scanner`), libs/snapshot/README.md (`publically`->`publicly`). — outcome pr-opened (fork PR #7, branch docs/fix-typos-and-broken-commands, commit 6df1c99) — docs-only, no code; substantive fork CI green (build install/build:all/test:unit, Scan, semgrep), deploy check red = fork CF secrets artifact (passes upstream).
 - 2026-09-09 GSA/site-scanning issue #1986 wrap url-scan in runScan — outcome pr-opened (fork PR #4, branch fix/urlscan-run-scan-guard) — verified failing-test-first; build:all/prettier/eslint green; fork CI build+scan+semgrep green, deploy red = fork secrets.
 - 2026-08-26 dap empty-version crash (candidate.version null/'' + Any-DAP-Match lowest priority) — outcome pr-opened (fork PR #1, branch fix/dap-empty-version-check) — verified tsc/lint/prettier + dap.spec green.
 
