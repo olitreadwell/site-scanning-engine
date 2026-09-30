@@ -1,5 +1,5 @@
 # GSA/site-scanning-engine context
-> refreshed 2026-09-24 | upstream default: main @ 3845a8228b2ecc6c233f643f3c7807cd48b8db62
+> refreshed 2026-09-30 | upstream default: main @ 0c91c29 (Merge PR #584 browserslist bump)
 
 ## Identity & policies
 - upstream: GSA/site-scanning-engine, default branch main, primary language TypeScript (NestJS monorepo), English-first (yes).
@@ -38,5 +38,8 @@
 - 2026-09-24 self-found bug: `BrowserService.processPage` (libs/browser/src/browser.service.ts) arms a 120s `setTimeout` in the promise executor and never `clearTimeout`s it, so a dead timer (holding the promise settle fn + page ref) stays queued for 120s after every page settles early. Distinct from upstream PR #585 (reject value/classification — different concern) and #586; PR #585 doesn't touch the timer lifecycle. — outcome pr-opened (fork PR #6, branch fix/process-page-timer-leak, commit 105d682) — verified failing-test-first (jest.getTimerCount()===1 on main, ===0 after fix), tsc/prettier/eslint clean, local jest green, build:all green, fork CI (build) + Scan + semgrep green, deploy red = fork secrets.
 (Initial PR #5 was created a draft and couldn't be un-drafted via API with this token type; closed it and reopened as non-draft PR #6 — PR #5 is a closed stub.)
 
+- 2026-09-30 self-found bug: `findCanonicalLInkInResponseHeaders` (libs/core-scanner/src/scans/seo.ts) matched the raw `Link` response header with one regex, so an angle-bracketed target kept its closing `>` (`<https://www.example.gov/>; rel="canonical"` -> `https://www.example.gov/>`), a bare/unquoted `rel=canonical` was missed entirely (returned null), and a header with several comma-separated link values returned junk up to the canonical marker. Feeds `canonical_link` in the SEO result / API DTO. — outcome pr-opened (fork PR #10, branch fix/canonical-link-header-parsing, commit 7b1c561) — verified failing-test-first (new seo-canonical.spec.ts: 3 failed/1 passed on main, 4/4 after fix); tsc/eslint/prettier clean; other core-scanner suites need Chromium (unavailable here) so the new spec is mock-based.
+
 ## Mined gaps (discovered, not yet attempted)
 - 2026-09-09 bug-fix: primary.ts calls `buildUrlScanResult(input, page, response, pageLogger)` directly in promiseAll, the ONLY scan not wrapped in the local `runScan` error-swallowing helper. If it throws, `Promise.all` rejects and the whole primary page fails instead of producing `urlScan:null` (which CoreResultService already null-guards). — status: attempted (pr-opened, fork PR #4)
+- 2026-09-30 bug-fix: canonical URL in the `Link` response header is parsed by regex over the whole header value (brackets kept, bare rel missed, multiple values mishandled). — status: attempted (pr-opened, fork PR #10)
