@@ -1,5 +1,5 @@
 # GSA/site-scanning-engine context
-> refreshed 2026-09-30 | upstream default: main @ 0c91c29 (Merge PR #584 browserslist bump)
+> refreshed 2026-10-01 | upstream default: main @ bbcb60c (Merge PR #595 docker node images)
 
 ## Identity & policies
 - upstream: GSA/site-scanning-engine, default branch main, primary language TypeScript (NestJS monorepo), English-first (yes).
@@ -39,6 +39,8 @@
 (Initial PR #5 was created a draft and couldn't be un-drafted via API with this token type; closed it and reopened as non-draft PR #6 — PR #5 is a closed stub.)
 
 - 2026-09-30 self-found bug: `findCanonicalLInkInResponseHeaders` (libs/core-scanner/src/scans/seo.ts) matched the raw `Link` response header with one regex, so an angle-bracketed target kept its closing `>` (`<https://www.example.gov/>; rel="canonical"` -> `https://www.example.gov/>`), a bare/unquoted `rel=canonical` was missed entirely (returned null), and a header with several comma-separated link values returned junk up to the canonical marker. Feeds `canonical_link` in the SEO result / API DTO. — outcome pr-opened (fork PR #10, branch fix/canonical-link-header-parsing, commit 7b1c561) — verified failing-test-first (new seo-canonical.spec.ts: 3 failed/1 passed on main, 4/4 after fix); tsc/eslint/prettier clean; other core-scanner suites need Chromium (unavailable here) so the new spec is mock-based; fork CI build success + Semgrep Scan success, Dev deployment red = fork secrets.
+
+- 2026-10-01 trivial/minor-fix docs cleanup (loop-trivial): 18 one-line typo/dead-link/stale-reference fixes across 10 files — README (`those to domains`->`those domains`, `using a the`->`using the`); docs/development.md (stale `scanner`->`scan-engine` app name, `npm run start:<app>`); docs/deployment.md (`standup`->`stand up` verb); docs/environment_provisioning.md (`provisionied`->`provisioned`, `` `cf spaces command` ``->`` `cf spaces` command ``, `env-NAME_OF_SPACE.yml`->`vars-NAME_OF_SPACE.yml` as shipped); docs/SECURITY.md (dead `gsa.gov/tts` + 2 dead `www.owasp.org/index.php/...` 404s -> live tts.gsa.gov / owasp.org URLs); apps/scan-engine/README.md (seccomp path `apps/scanner/chrome.json`->`apps/scan-engine/chrome.json`); apps/api DTO doc comments (`constrast`->`contrast`, `submdomain`->`subdomain`, `occurences`->`occurrences`, `soure`->`source`, `additiona`->`additional`); libs/ingest log string (`delection`->`deletion`); libs/browser comment (`pool.aquire()`->`pool.acquire()`). — outcome pr-opened (fork PR #11, branch docs/fix-typos-and-dead-links, commit 1952ef9) — docs/comments only, no behavior; avoids PR #7's lines (different lines in the shared files, no libs/snapshot edit); fork CI build+semgrep+Scan green, deploy red = fork CF secrets.
 
 ## Mined gaps (discovered, not yet attempted)
 - 2026-09-09 bug-fix: primary.ts calls `buildUrlScanResult(input, page, response, pageLogger)` directly in promiseAll, the ONLY scan not wrapped in the local `runScan` error-swallowing helper. If it throws, `Promise.all` rejects and the whole primary page fails instead of producing `urlScan:null` (which CoreResultService already null-guards). — status: attempted (pr-opened, fork PR #4)
