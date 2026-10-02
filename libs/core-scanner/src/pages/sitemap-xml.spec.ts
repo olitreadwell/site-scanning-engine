@@ -16,6 +16,14 @@ describe('sitemap-xml scanner', () => {
   let mockResponse: MockProxy<HTTPResponse>;
   let mockLogger: MockProxy<Logger>;
   const finalUrl = 'https://18f.gsa.gov';
+  const input: CoreInputDto = {
+    websiteId: 1,
+    url: '18f.gov',
+    filter: false,
+    pageviews: 1,
+    visits: 1,
+    scanId: '123',
+  };
 
   beforeEach(async () => {
     mockPage = mock<Page>();
@@ -36,15 +44,6 @@ describe('sitemap-xml scanner', () => {
   });
 
   it('should scan for a sitemap-xml page', async () => {
-    const input: CoreInputDto = {
-      websiteId: 1,
-      url: '18f.gov',
-      filter: false,
-      pageviews: 1,
-      visits: 1,
-      scanId: '123',
-    };
-
     mockResponse.text.mockResolvedValue(source);
     mockResponse.url.mockReturnValue('https://18f.gsa.gov/sitemap.xml');
     mockPage.goto.mockResolvedValue(mockResponse);
@@ -81,5 +80,58 @@ describe('sitemap-xml scanner', () => {
         sitemapXmlDetected: true,
       },
     });
+  });
+
+  it('parses a DD/MM/YYYY <lastmod> date that the native Date parser rejects', async () => {
+    mockResponse.url.mockReturnValue('https://18f.gsa.gov/sitemap.xml');
+    mockPage.goto.mockResolvedValue(mockResponse);
+    redirectRequest.redirectChain.mockReturnValue([]);
+    const mockHttpService = mock<HttpService>();
+    const axiosResponse: AxiosResponse<any> = {
+      data: '<urlset><url><loc>https://example.gov/</loc><lastmod>20/02/2025</lastmod></url></urlset>',
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {
+        headers: null,
+      },
+    };
+    jest
+      .spyOn(mockHttpService, 'get')
+      .mockImplementationOnce(() => of(axiosResponse));
+
+    const scanner = createSitemapXmlScanner(mockLogger, input, mockHttpService);
+    const result = await scanner(mockPage);
+
+    expect(result.sitemapXmlScan.sitemapXmlLastMod).toEqual(
+      '2025-02-20T00:00:00.000Z',
+    );
+  });
+
+  it('detects and parses a DD/MM/YYYY date in a <td> tag', async () => {
+    mockResponse.url.mockReturnValue('https://18f.gsa.gov/sitemap.xml');
+    mockPage.goto.mockResolvedValue(mockResponse);
+    redirectRequest.redirectChain.mockReturnValue([]);
+    (mockPage.$$eval as unknown as jest.Mock).mockResolvedValue(['20/02/2025']);
+    const mockHttpService = mock<HttpService>();
+    const axiosResponse: AxiosResponse<any> = {
+      data: '<html><body><table><tr><td>20/02/2025</td></tr></table></body></html>',
+      status: 200,
+      statusText: 'OK',
+      headers: {},
+      config: {
+        headers: null,
+      },
+    };
+    jest
+      .spyOn(mockHttpService, 'get')
+      .mockImplementationOnce(() => of(axiosResponse));
+
+    const scanner = createSitemapXmlScanner(mockLogger, input, mockHttpService);
+    const result = await scanner(mockPage);
+
+    expect(result.sitemapXmlScan.sitemapXmlLastMod).toEqual(
+      '2025-02-20T00:00:00.000Z',
+    );
   });
 });
