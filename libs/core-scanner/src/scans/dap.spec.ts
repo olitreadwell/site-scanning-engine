@@ -280,6 +280,26 @@ describe('dap scan', () => {
       );
       expect(result.version).toEqual('20240712 v8.2 - GA4');
     });
+    it('should prefer a candidate with a detected version over one with an empty version', async () => {
+      const withEmptyVersion = {
+        ...MOCK_DAP_SCRIPT_CANDIDATES.realScript,
+        version: '',
+      };
+      const result = getBestCandidate(
+        mockLogger,
+        [withEmptyVersion, MOCK_DAP_SCRIPT_CANDIDATES.realScript],
+        'https://test.gov/Universal-Federated-Analytics-Min.js?test1=1&test2=2',
+      );
+      expect(result.version).toEqual('20240712 v8.2 - GA4');
+    });
+    it('should return a candidate that matches only the lowest-priority check', async () => {
+      const result = getBestCandidate(
+        mockLogger,
+        [MOCK_DAP_SCRIPT_CANDIDATES.gaTagsNoVersion],
+        undefined,
+      );
+      expect(result).toEqual(MOCK_DAP_SCRIPT_CANDIDATES.gaTagsNoVersion);
+    });
   });
 
   describe('checkUrlForScriptNameMatch()', () => {
@@ -338,6 +358,13 @@ describe('dap scan', () => {
       );
       expect(result).toEqual(false);
     });
+    it('should return FALSE if the candidate has an empty version string', async () => {
+      const result = checkCandidateForScriptAndVersion({
+        ...MOCK_DAP_SCRIPT_CANDIDATES.realScript,
+        version: '',
+      });
+      expect(result).toEqual(false);
+    });
     it('should return FALSE if the candidate is missing a valid script/GA Tag', async () => {
       const result = checkCandidateForScriptAndVersion(
         MOCK_DAP_SCRIPT_CANDIDATES.invalidUrlWithVersion,
@@ -363,6 +390,13 @@ describe('dap scan', () => {
       const result = checkCandidateForPropertyAndVersion(
         MOCK_DAP_SCRIPT_CANDIDATES.gaTagsNoVersion,
       );
+      expect(result).toEqual(false);
+    });
+    it('should return FALSE if the candidate has an empty version string', async () => {
+      const result = checkCandidateForPropertyAndVersion({
+        ...MOCK_DAP_SCRIPT_CANDIDATES.gaTagsWithVersion,
+        version: '',
+      });
       expect(result).toEqual(false);
     });
   });
