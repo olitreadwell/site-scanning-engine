@@ -136,7 +136,7 @@ describe('CoreResult', () => {
 
   // Phase 1 "collect before publish" workflow. We add a field, let it collect data,
   // announce it on the mailing list, and then publish it once people have been made aware
-  // of the upcoming change. The pulishing of the field counts as Phase 2.
+  // of the upcoming change. The publishing of the field counts as Phase 2.
   describe('snapshotColumnOrder workflow (add-field Phase 1 compatibility)', () => {
     it('an @Exclude()-ed field absent from snapshotColumnOrder is not flagged', () => {
       // Simulate the Phase 1 state: a new field has @Expose but also @Exclude().
