@@ -1,7 +1,7 @@
 # Welcome
 
 We're so glad you're thinking about contributing to a
-[open source project of the U.S. government](https://code.gov/)!
+[open source project of the U.S. government](https://digital.gov/topics/open-source/)!
 If you're unsure about anything, just ask -- or submit the issue
 or pull request anyway. The worst that can happen is you'll be
 politely asked to change something. We love all friendly contributions.
@@ -13,7 +13,7 @@ We encourage you to read this project's CONTRIBUTING policy
 
 We want to ensure a welcoming environment for all of our projects.
 Our staff follow the
-[TTS Code of Conduct](https://18f.gsa.gov/code-of-conduct/) and
+[TTS Code of Conduct](https://github.com/18F/.github/blob/master/CODE_OF_CONDUCT.md) and
 all contributors should do the same.
 
 We adhere to the
@@ -26,7 +26,7 @@ our responsibility to protect the public’s information, including
 financial and personal information, from unwarranted disclosure. For more
 information about security and vulnerability disclosure for our projects,
 please read our
-[18F Vulnerability Disclosure Policy](https://18f.gsa.gov/vulnerability-disclosure-policy/).
+[18F Vulnerability Disclosure Policy](https://github.com/18F/vulnerability-disclosure-policy/blob/master/vulnerability-disclosure-policy.md).
 
 ## Public domain
 
