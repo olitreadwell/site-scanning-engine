@@ -41,7 +41,7 @@ consumers — the exact failure this skill exists to prevent.
 A field reaches CSV/JSON snapshots only if it passes **both gates**:
 
 1. **Serialization gate** (a): Survives `classToPlain` in `Website.serialized()` (`entities/website.entity.ts:75`). Controlled by `@Exclude()` / `@Expose()` decorators.
-2. **Column order gate** (b): Appears in `CoreResult.snapshotColumnOrder` (`entities/core-result.entity.ts:591`).
+2. **Column order gate** (b): Appears in `CoreResult.snapshotColumnOrder` (`entities/core-result.entity.ts:665`).
 
 For the API path, only gate (a) applies (via `apps/api/src/website/website-serializer.interceptor.ts`).
 
@@ -148,7 +148,7 @@ If the field comes from a scan (not just metadata), wire it through the scan pip
 > and you have verified the data. Adding a field to `snapshotColumnOrder` while
 > it is still empty publishes an empty column to public snapshots.
 
-Edit `static snapshotColumnOrder` in `entities/core-result.entity.ts` (line ~591):
+Edit `static snapshotColumnOrder` in `entities/core-result.entity.ts` (line ~665):
 
 ```typescript
 static snapshotColumnOrder = [

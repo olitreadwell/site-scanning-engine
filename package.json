@@ -25,7 +25,7 @@
     "scan:dev:rdcp": "nest start cli --watch -- scan-site --url rdcp.cdc.gov",
     "scan:badlogs": "nest start cli --watch -- scan-site --url rdcp.cdc.gov | grep -v '\"project\":\"site-scanning\"'",
     "scan:badurl": "nest start cli --watch -- scan-site --url an.unknown.url",
-    "snapshot": "nest start cli -- create-snapshot",
+    "snapshot": "nest start cli -- create-daily-snapshot",
     "start": "nest start",
     "start:all": "concurrently \"npm run start:api\" \"npm run start:concurrent-scan-engine\"",
     "start:api": "nest start api",

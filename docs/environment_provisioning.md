@@ -3,7 +3,7 @@
 ## Overview
 
 Deploying to an environment (space) requires that the space exist --
-be provisionied -- before code can be deployed to it. The steps to
+be provisioned -- before code can be deployed to it. The steps to
 provision an environment include:
 
 1. Create the space on Cloud Foundry
@@ -19,7 +19,7 @@ provision an environment include:
 ### 1. Create the space on Cloud Foundry
 
 First, verify that the environment you wish to create doesn't yet
-exist by using the `cf spaces command` (note: you must be logged
+exist by using the `cf spaces` command (note: you must be logged
 in first).
 
 Assuming the space does not yet exist, use the `cf create-space`
@@ -40,7 +40,7 @@ to be deployed to a space. The `manifest.yml` file for this project
 uses [variable substitution](https://docs.cloudfoundry.org/devguide/deploy-apps/manifest-attributes.html#variable-substitution)
 to specify environment-specific variables (e.g., memory quota,
 number of instances, etc.). The values for these variables are found
-in the `env-NAME_OF_SPACE.yml` files. So, for example, the vars
+in the `vars-NAME_OF_SPACE.yml` files. So, for example, the vars
 file for the `dev` environment is `vars-dev.yml` (case-sensitive).
 
 So, to create a vars file for a new environment, copy an existing
