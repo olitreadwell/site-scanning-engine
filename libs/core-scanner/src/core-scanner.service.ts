@@ -63,7 +63,7 @@ export class CoreScannerService implements Scanner<
     return await this.browserService.useBrowser(async (browser) => {
       const result = this.initResultObject(input);
 
-      // Iterate over the Page enum and run the scan for each page vis this.runPage()
+      // Iterate over the Page enum and run the scan for each page via this.runPage()
       scanLogger.info('Running scans for all pages...');
       for (const page in Page) {
         scanLogger.info(`Running scan for page '${Page[page]}'...`);
