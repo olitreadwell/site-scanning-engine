@@ -253,7 +253,9 @@ function isDate(dateStr: string, logger: Logger): boolean {
     const match = dateStr.match(regex);
     if (match) {
       const date = parser(match);
-      return !isNaN(date.getTime());
+      if (!isNaN(date.getTime())) {
+        return true;
+      }
     }
   }
   return false;
@@ -334,7 +336,10 @@ function parseFallbackDate(dateStr: string): Date | null {
   for (const { regex, parser } of dateFormats) {
     const match = dateStr.match(regex);
     if (match) {
-      return parser(match);
+      const date = parser(match);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
     }
   }
 
