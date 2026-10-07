@@ -56,13 +56,16 @@ export class BrowserService implements OnModuleDestroy {
     let result: Promise<Result>;
     try {
       result = new Promise<Result>((resolve, reject) => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
           reject('Processing timed out');
         }, 120000);
         handler(page)
           .then(resolve)
           .catch(reject)
-          .finally(() => page.close());
+          .finally(() => {
+            clearTimeout(timeout);
+            page.close();
+          });
       });
       return result;
     } catch (error) {
