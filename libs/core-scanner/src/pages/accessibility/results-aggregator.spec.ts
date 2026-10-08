@@ -57,4 +57,43 @@ describe('aggregateResults', () => {
     expect(result.resultsList[2].id).toEqual('autocomplete-valid');
     expect(result.resultsList[3].id).toEqual('link-in-text-block');
   });
+
+  it('should aggregate an input-button-name violation into the form-names category', () => {
+    const results: Result[] = [
+      {
+        id: 'input-button-name',
+        impact: 'serious',
+        tags: ['cat.name-role-value', 'wcag2a', 'wcag412', 'section508'],
+        description: 'Ensures input buttons have discernible text',
+        help: 'Input buttons must have discernible text',
+        helpUrl: 'https://dequeuniversity.com/rules/axe/4.11/input-button-name',
+        nodes: [
+          {
+            html: '<input type="submit">',
+            impact: 'serious',
+            target: ['input'],
+            any: [],
+            all: [],
+            none: [
+              {
+                id: 'input-button-name',
+                impact: 'serious',
+                message: 'Element does not have a discernible text',
+                data: null,
+                relatedNodes: [],
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    const result = aggregateResults(results);
+
+    expect(result.resultsSummary).toHaveProperty('form-names');
+    expect(result.resultsSummary['form-names']).toEqual(1);
+    expect(result.resultsList.map((entry) => entry.id)).toEqual([
+      'input-button-name',
+    ]);
+  });
 });
