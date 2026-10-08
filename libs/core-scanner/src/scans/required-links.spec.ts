@@ -5,7 +5,7 @@ import pino from 'pino';
 const mockLogger = pino();
 
 describe('required links scan', () => {
-  it('detects required links strings in href attribute and a element text', async () => {
+  it('detects required links strings in href attribute and an element text', async () => {
     await newTestPage(async ({ page }) => {
       expect(await buildRequiredLinksResult(mockLogger, page)).toEqual({
         hyperlinkDomains:

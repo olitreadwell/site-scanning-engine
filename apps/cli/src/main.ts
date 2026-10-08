@@ -243,7 +243,7 @@ async function main() {
     .description('clears the Redis queue and cleans up old jobs')
     .action(clearQueue);
 
-  // queue-scans
+  // enqueue-scans
   program
     .command('enqueue-scans')
     .description(
@@ -251,7 +251,7 @@ async function main() {
     )
     .action(enqueueScans);
 
-  // queue-site
+  // enqueue-site
   program
     .command('enqueue-site')
     .description(
@@ -268,11 +268,11 @@ async function main() {
     )
     .action(checkQueueStatus);
 
-  // queue-limited-scans
+  // enqueue-limited-scans
   program
     .command('enqueue-limited-scans')
     .description(
-      'enqueue-scans-limit adds a limited set of targets from the Website database table to the redis queue',
+      'enqueue-limited-scans adds a limited set of targets from the Website database table to the redis queue',
     )
     .option(
       '--limit <number>',
