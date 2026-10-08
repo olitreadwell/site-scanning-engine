@@ -71,7 +71,6 @@ docker-compose up --build -d
 Starts:
 - PostgreSQL (port 5432)
 - Redis (port 6379)
-- Minio (port 9000, 9001)
 
 ### Rebuild Containers (wipes data)
 

@@ -34,7 +34,7 @@ export class WebsiteController {
     type: PaginatedWebsiteResponseDto,
   })
   @ApiInternalServerErrorResponse({
-    // This decorator is For OpenAPI/Swagger documentation.
+    // This decorator is for OpenAPI/Swagger documentation.
     description: 'This response type indicates an internal error.',
   })
   async getResults(@Query() query: FilterWebsiteDto) {
@@ -70,7 +70,7 @@ export class WebsiteController {
       'This response indicated that there is no matching `target_url` in the database',
   })
   @ApiInternalServerErrorResponse({
-    // This decorator is For OpenAPI/Swagger documentation.
+    // This decorator is for OpenAPI/Swagger documentation.
     description: 'This response type indicates an internal error.',
   })
   async getResultByUrl(@Param('url') url: string) {

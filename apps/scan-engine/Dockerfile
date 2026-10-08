@@ -1,7 +1,7 @@
 # Scanner Dockerfile
 #
 # Note: This Dockerfile is only used for local development.
-# In theory, one should be able to adapt it to run in in the cloud and
+# In theory, one should be able to adapt it to run in the cloud and
 # that is
 # But one should note the weirdness involved in getting Chrome running in Docker.
 # See the scan-engine/README.md for more info.
