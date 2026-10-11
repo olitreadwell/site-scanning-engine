@@ -74,7 +74,7 @@ describe('CsvSerializer', () => {
     expect(deserializedData.one).toEqual('test');
   });
 
-  it('it should remove newlines from the data', async () => {
+  it('should remove newlines from the data', async () => {
     const serializer = new CsvSerializer(CoreResult.snapshotColumnOrder);
     const website = new Website();
     website.url = 'more\nthan\none\nline';

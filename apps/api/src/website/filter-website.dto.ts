@@ -15,7 +15,7 @@ const statuses = Object.values(ScanStatus);
 export class FilterWebsiteDto extends PaginationRequestDto {
   /**
    * `target_url_domain` is the domain name plus the top-level domain (TLD) of the target url.
-   * The `target_url` is the url that the scanner starts with. This is in constrast to the `final_url` which
+   * The `target_url` is the url that the scanner starts with. This is in contrast to the `final_url` which
    * is the url where the scanner ends up, after following redirects.
    *
    * @example gsa.gov

@@ -517,7 +517,7 @@ gh run list --workflow=deploy.yml --limit 1
 Wait for status: ✓ (completed).
 
 **Alternative: Trigger from GitHub Actions UI**
-1. Go to https://github.com/GSA/site-scanning/actions/workflows/deploy.yml
+1. Go to https://github.com/GSA/site-scanning-engine/actions/workflows/deploy.yml
 2. Click "Run workflow" → "Run workflow"
 
 ### Step 2: Run Ingest

@@ -54,7 +54,7 @@ export class WebsiteApiResultDto {
   final_url_domain: string;
 
   /**
-   * `final_url_domain` includes the submdomain and the top-level domain of the final url.
+   * `final_url_domain` includes the subdomain and the top-level domain of the final url.
    *
    * @example www.gsa.gov
    */
@@ -164,7 +164,7 @@ export class WebsiteApiResultDto {
   uswds_favicon: number;
 
   /**
-   * `uswds_string_in_css` is the number of occurences of "uswds" in the CSS source.
+   * `uswds_string_in_css` is the number of occurrences of "uswds" in the CSS source.
    *
    * @example 20
    */
@@ -187,7 +187,7 @@ export class WebsiteApiResultDto {
   uswds_publicsans_font: number;
 
   /**
-   * `uswds_source_sans_font` is the presence of the Source Sans font in CSS soure.
+   * `uswds_source_sans_font` is the presence of the Source Sans font in CSS source.
    * Presence adds 5 points to the USWDS likelihood heuristic.
    */
   uswds_source_sans_font: number;
@@ -477,7 +477,7 @@ export class WebsiteApiResultDto {
   source_list_pulse: boolean;
 
   /**
-   * `source_list_other` indicates whether the manually maintained list of additiona websites provided this URL for the Target URL List.
+   * `source_list_other` indicates whether the manually maintained list of additional websites provided this URL for the Target URL List.
    *
    * @example true
    */

@@ -5,7 +5,7 @@
  */
 export class PaginationResponseDto {
   /**
-   * `meta` contains information various counts related to items and pages.
+   * `meta` contains information about various counts related to items and pages.
    */
   meta: Meta;
 

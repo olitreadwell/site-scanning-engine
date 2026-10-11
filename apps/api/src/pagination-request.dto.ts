@@ -8,7 +8,6 @@ import { Transform } from 'class-transformer';
  * ```ts
  * class WebsiteDto extends PaginationRequestDto {}
  * ```
- * ```
  */
 export class PaginationRequestDto {
   /**

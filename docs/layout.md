@@ -39,7 +39,7 @@ The libraries are:
 
 - [Browser](../libs/browser) which creates a headless browser for scanning.
 - [Core Scanner](../libs/core-scanner) performs all of the basic scanning
-  logic. See [Website Data](https://github.com/18F/site-scanning-documentation/blob/main/about/website-data.md)
+  logic. See [Website Data](https://github.com/GSA/site-scanning-documentation/blob/main/data/Site_Scanning_Data_Dictionary.csv)
   for more info.
 - [Database](../libs/database) which is responsible for all data access.
 - [Message Queue](../libs/message-queue) which is responsible for handling

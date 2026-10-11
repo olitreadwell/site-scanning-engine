@@ -15,7 +15,7 @@ environment:
 
 ### Deploy the Required Services in the Local Environment
 
-A `docker-compose.yml` file is provided to standup the required services
+A `docker-compose.yml` file is provided to stand up the required services
 in the local environment.
 
 #### Configure The Required Services
@@ -43,7 +43,7 @@ After -- and only after -- a `.env` file is provided, the
 services:
 
 ```bash
-( cd "$(git rev-parse --show-toplevel" \
+( cd "$(git rev-parse --show-toplevel)" \
   && docker-compose up \
     --build \
     --detach
@@ -70,7 +70,7 @@ that we can reference the image when running it:
 docker run \
   --rm \
   --interactive \
-  --tty
+  --tty \
   scan-engine
 ```
 

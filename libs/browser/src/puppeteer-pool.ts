@@ -125,7 +125,7 @@ export const createPuppeteerPool = (
   };
 
   // Create a `use` function that provides a callback/handler interface over
-  // `pool.aquire()` and `pool.release()`.
+  // `pool.acquire()` and `pool.release()`.
   pool.use = (fn) => {
     let resource;
     return pool

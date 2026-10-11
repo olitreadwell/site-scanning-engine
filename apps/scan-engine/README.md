@@ -4,7 +4,7 @@ This directory contains the source and documentation for the
 `Scanner` component of the Site-Scanning application.
 
 Also see the `Core Scanner` component:
-[Core-Scaner](../../libs/core-scanner)
+[Core-Scanner](../../libs/core-scanner)
 .
 
 ## Scan Engine
@@ -76,7 +76,7 @@ to get the `Puppeteer` project to run in Docker:
 Our application uses this as follows:
 
 ```sh
-docker run --security-opt seccomp=apps/scanner/chrome.json <container-tag>
+docker run --security-opt seccomp=apps/scan-engine/chrome.json <container-tag>
 ```
 
 This can also be passed in the `docker-compose` file as follows:

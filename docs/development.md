@@ -39,7 +39,7 @@ Here are some common commands. See the [package.json](../package.json) for all o
 # start all apps
 npm run start:all
 
-# start a single app, where <app_name> is one of scanner or api
+# start a single app, where <app_name> is one of scan-engine or api
 npm run start:<app_name>
 
 # start an app and live-reload
@@ -56,7 +56,7 @@ Here are some common commands. See the [package.json](../package.json) for all o
 npm run test
 
 # test with no end-to-end tests
-npm run test:no-e2e
+npm run test:unit
 
 # test with only end-to-end tests
 npm run test:e2e
