@@ -151,13 +151,44 @@ const findCanonicalLInkInResponseHeaders = async (
   const headers = await response.headers();
 
   for (const key in headers) {
-    if (key.toLowerCase() === 'link') {
-      const value = headers[key];
-      if (value.toLowerCase().includes('rel=canonical')) {
-        const regex = /https?:\/\/[^;]+(?=; rel="canonical")/i;
-        const matches = value.match(regex);
-        return matches ? matches[0] : null;
-      }
+    if (key.toLowerCase() !== 'link') {
+      continue;
+    }
+
+    const canonicalLink = parseCanonicalLinkHeader(headers[key]);
+    if (canonicalLink) {
+      return canonicalLink;
+    }
+  }
+
+  return null;
+};
+
+/**
+ * Reads the canonical target out of a `Link` response header value (RFC 8288).
+ *
+ * One header value can hold several comma-separated link values, and the `rel`
+ * parameter may be quoted or bare, so both forms are handled. Returns null when
+ * no link value declares a canonical relation.
+ */
+const parseCanonicalLinkHeader = (headerValue: string): string | null => {
+  for (const linkValue of headerValue.split(/,\s*(?=<)/)) {
+    const target = linkValue.match(/<([^>]*)>/);
+    if (!target) {
+      continue;
+    }
+
+    const parameters = linkValue.slice(linkValue.indexOf('>') + 1);
+    const rel = parameters.match(
+      /;\s*rel\s*=\s*(?:"([^"]*)"|'([^']*)'|([^;,\s]*))/i,
+    );
+    const relations = rel?.[1] ?? rel?.[2] ?? rel?.[3] ?? '';
+    const isCanonical = relations
+      .split(/\s+/)
+      .some((relation) => relation.toLowerCase() === 'canonical');
+
+    if (isCanonical) {
+      return target[1].trim() || null;
     }
   }
 
