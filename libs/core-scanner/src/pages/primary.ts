@@ -138,6 +138,15 @@ const primaryScan = async (
     url,
   );
 
+  const wrappedUrlScanResult = runScan(
+    input,
+    pageLogger,
+    (stepLogger, page, response) =>
+      buildUrlScanResult(input, page, response, stepLogger),
+    'UrlScan',
+    url,
+  );
+
   const [
     urlScan,
     dapScan,
