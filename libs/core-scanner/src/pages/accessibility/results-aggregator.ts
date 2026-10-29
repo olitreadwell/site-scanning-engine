@@ -64,7 +64,7 @@ export function aggregateResults(results: Result[]): AggregatedResults {
     'auto-updating': ['meta-refresh'],
     contrast: ['color-contrast'],
     flash: ['blink', 'marquee'],
-    'form-names': ['aria-input-field-name', 'input-field-name', 'select-name'],
+    'form-names': ['aria-input-field-name', 'input-button-name', 'select-name'],
     'frames-iframes': ['frame-title'],
     images: [
       'area-alt',
