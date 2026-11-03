@@ -145,7 +145,7 @@ export class IngestService {
             const allWebsitesFollowingDeletion =
               await this.websiteService.findAllWebsites();
             this.logger.log(
-              `total number of websites following delection of invalid url(s): ${allWebsitesFollowingDeletion.length}`,
+              `total number of websites following deletion of invalid url(s): ${allWebsitesFollowingDeletion.length}`,
             );
           }
 

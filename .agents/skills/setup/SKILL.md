@@ -42,7 +42,6 @@ docker-compose up --build -d
 This starts:
 - PostgreSQL database
 - Redis queue
-- Minio (S3-compatible storage)
 
 ### 4. Build Applications
 

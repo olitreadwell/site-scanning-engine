@@ -1,7 +1,7 @@
 # API Dockerfile
 #
 # Note: This Dockerfile is only used for local development.
-# In theory, one should be able to adapt it to run in in the cloud.
+# In theory, one should be able to adapt it to run in the cloud.
 #
 # Another Note:
 # This file is using multi-stage builds for build performance.

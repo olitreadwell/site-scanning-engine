@@ -11,7 +11,7 @@ Site Scanning Engine is a Node.js microservice application that uses Headless Ch
 **Recommended approach**: Start with GitHub Actions workflows in `.github/workflows/` and work backwards to understand how the system operates. The workflows show the actual commands being run in production, which you can trace back through the CLI to the underlying services and libraries.
 
 For example:
-1. Look at `.github/workflows/ingest.yml` - shows `nest start cli -- ingest` command
+1. Look at `.github/workflows/ingest.yml` - shows `node dist/apps/cli/main.js ingest` command
 2. Trace to `apps/cli/src/` to find the ingest command implementation
 3. Follow to `libs/ingest/` to see the actual ingestion logic
 4. Continue to `libs/database/` and `entities/` to understand data storage
