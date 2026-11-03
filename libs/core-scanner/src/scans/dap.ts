@@ -335,7 +335,7 @@ export function getBestCandidate(
     {
       name: 'Version',
       check: (candidate: DapScriptCandidate, scriptUrl: string) =>
-        candidate.version !== null,
+        candidate.version !== null && candidate.version !== '',
     },
     {
       name: 'Script Name Match',
@@ -350,7 +350,7 @@ export function getBestCandidate(
   ];
 
   let bestCandidate = null;
-  let bestMatchLevel = 5;
+  let bestMatchLevel = checks.length;
   for (const candidate of dapScriptCandidates) {
     let matchLevel = -1;
     const truncatedUrl = getTruncatedUrl(candidate.url);
@@ -387,7 +387,7 @@ export function checkCandidateForScriptAndVersion(
   candidate: DapScriptCandidate,
 ): boolean {
   const isExactScriptMatch = checkUrlForScriptNameMatch(candidate.url);
-  const hasVersion = candidate.version !== null;
+  const hasVersion = candidate.version !== null && candidate.version !== '';
   return !!isExactScriptMatch && hasVersion;
 }
 
@@ -403,7 +403,7 @@ export function checkCandidateForScriptUrlFromIdAndVersion(
   scriptUrl: string,
 ): boolean {
   const hasScriptUrl = candidate.url === scriptUrl;
-  const hasVersion = candidate.version !== null;
+  const hasVersion = candidate.version !== null && candidate.version !== '';
   return !!hasScriptUrl && hasVersion;
 }
 /**
@@ -457,7 +457,7 @@ export function checkCandidateForPropertyAndVersion(
 ): boolean {
   const isPropertyIdMatch = checkUrlForPropertyIdMatch(candidate.url);
   const isPostDataMatch = checkPostDataForPropertyIdMatch(candidate.postData);
-  const hasVersion = candidate.version !== null;
+  const hasVersion = candidate.version !== null && candidate.version !== '';
   return !!(isPropertyIdMatch || isPostDataMatch) && hasVersion;
 }
 

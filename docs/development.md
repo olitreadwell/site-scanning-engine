@@ -56,7 +56,7 @@ Here are some common commands. See the [package.json](../package.json) for all o
 npm run test
 
 # test with no end-to-end tests
-npm run test:no-e2e
+npm run test:unit
 
 # test with only end-to-end tests
 npm run test:e2e
@@ -69,4 +69,7 @@ npm run test:watch
 
 # lint
 npm run lint
+
+# report duplicated code (report-only; see README)
+npm run lint:dupes
 ```

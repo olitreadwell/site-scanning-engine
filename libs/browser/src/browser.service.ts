@@ -5,6 +5,8 @@
 import { Browser, Page } from 'puppeteer';
 import { Inject, Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
 
+import { PROCESSING_TIMEOUT_MESSAGE } from 'entities/scan-status';
+
 import { PuppeteerPool, PUPPETEER_TOKEN } from './puppeteer.service';
 
 @Injectable()
@@ -56,13 +58,16 @@ export class BrowserService implements OnModuleDestroy {
     let result: Promise<Result>;
     try {
       result = new Promise<Result>((resolve, reject) => {
-        setTimeout(() => {
-          reject('Processing timed out');
+        const timeout = setTimeout(() => {
+          reject(new Error(PROCESSING_TIMEOUT_MESSAGE));
         }, 120000);
         handler(page)
           .then(resolve)
           .catch(reject)
-          .finally(() => page.close());
+          .finally(() => {
+            clearTimeout(timeout);
+            page.close();
+          });
       });
       return result;
     } catch (error) {
