@@ -28,12 +28,13 @@ The project's issue tracker and other relevant repositories and links [can be fo
     - [Enqueue scans](#enqueue-scans)
     - [Run individual Scans](#run-individual-scans)
   - [Test](#test)
+    - [Duplicate code](#duplicate-code)
   - [Deploy](#deploy)
 
 - [Development Documentation](./docs)
   - [Project Layout](./docs/layout.md)
   - [Detailed Development](./docs/development.md)
-  - [Architecture](./docs/architecture/README.md)
+  - [Architecture](./docs/product/ARCHITECTURE.md)
 
 ## Quickstart
 
@@ -41,7 +42,7 @@ Development Requirements:
 
 - `git`
 - `nodejs`
-- `nvm` (see [.nvmrc](./.nvmrc) for current `node` version.
+- `nvm` (see [.nvmrc](./.nvmrc) for current `node` version).
 - `docker`
 - `docker-compose`
 - Cloud Foundry CLI (aka `cf`)
@@ -76,7 +77,7 @@ Note that this file is not version-controlled and should only be used for
 local development.
 
 Before starting Docker, create a `.env` file in the project root and add
-the following values replacing `<add_a_key_here>` with a local passwords
+the following values replacing `<add_a_key_here>` with local passwords
 that are at least 8 characters long.
 
 **Note: this is only for local development and has no impact on the Cloud.gov configuration**
@@ -152,7 +153,7 @@ to Javascript, doing any minification and optimization in the
 process. All of the app artifacts end up in the `/dist` directory.
 This is ultimately what gets pushed to Cloud Foundry.
 
-Note that you can also build apps seperately:
+Note that you can also build apps separately:
 
 ```bash
 npm run build:api
@@ -221,6 +222,22 @@ npm run test:unit
 
 This runs all unit tests.
 
+### Duplicate code
+
+[jscpd](https://github.com/kucherenko/jscpd) reports copy/pasted TypeScript
+across `apps/`, `libs/`, `entities/`, `scripts/`, and `test/`, including spec
+files. Settings live in [`.jscpd.json`](.jscpd.json).
+
+```bash
+npm run lint:dupes
+```
+
+CI runs the same command. It is **report-only** for now: no `threshold` is
+set, so duplication never fails the build. The baseline when this was added
+was 3.80% duplicated lines (34 clones). To start enforcing, add a `threshold`
+(maximum duplicated-lines percentage) to `.jscpd.json` at or just above the
+current level, then lower it as duplication is consolidated.
+
 ## Deploy
 
 Deployments to Cloud.gov are handled by GitHub Actions, not a local script.
@@ -243,4 +260,4 @@ See [Deployment](docs/deployment.md) for details.
 - [Development](docs/development.md)
 - [Environment Provisioning](docs/environment_provisioning.md)
 - [Layout](docs/layout.md)
-- [Architectural Diagram](docs/architecture/diagrams/images/architecture-cloud-gov.png)
+- [Architecture](docs/product/ARCHITECTURE.md)

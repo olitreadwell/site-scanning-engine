@@ -52,6 +52,15 @@ describe('BrowserService', () => {
     expect(mockPage.close).toHaveBeenCalled();
   });
 
+  it('clears the processing timeout when the scan settles before the budget', async () => {
+    mockBrowser.newPage.calledWith().mockResolvedValue(mockPage);
+
+    await service.processPage(mockBrowser, async () => 'ok');
+
+    expect(jest.getTimerCount()).toBe(0);
+    expect(mockPage.close).toHaveBeenCalled();
+  });
+
   it('closes the browser onModuleDestroy lifecycle event', async () => {
     await service.onModuleDestroy();
     expect(mockPuppeteerPool.drain).toHaveBeenCalled();

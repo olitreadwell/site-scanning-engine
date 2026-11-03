@@ -52,6 +52,14 @@ const primaryScan = async (
     'DAPScan',
     url,
   );
+  const wrappedUrlScanResult = runScan(
+    input,
+    pageLogger,
+    async (logger, page: Page, response) =>
+      buildUrlScanResult(input, page, response, logger),
+    'UrlScan',
+    url,
+  );
   const wrappedThirdPartyResult = runScan(
     input,
     pageLogger,
