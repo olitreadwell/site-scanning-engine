@@ -36,7 +36,7 @@ export const PuppeteerService = {
         // destroyed; set to 0 to disable
         maxUses: 100,
 
-        // Validate resource before borrowing; required for `maxUses and `validator`
+        // Validate resource before borrowing; required for `maxUses` and `validator`
         testOnBorrow: true,
 
         // Arguments to pass on to Puppeteer

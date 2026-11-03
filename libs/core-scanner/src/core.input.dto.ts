@@ -4,7 +4,7 @@ import { IsBoolean, IsNumber, IsString, IsUrl } from 'class-validator';
  * CoreInputDto is a Data Transfer Object for input to the Core scanner.
  *
  * @remarks The CoreInputDto provides a consistent interface for passing data to the
- * Core scanners scan method. Additionally, it uses the class-validator library to provide
+ * Core scanner's scan method. Additionally, it uses the class-validator library to provide
  * a validation schema.
  */
 export class CoreInputDto {

@@ -34,7 +34,7 @@ import { formatValue } from '@app/snapshot/serializers/csv-helpers';
 //   const at = base.indexOf('some_neighbor_column');
 //   const CSV_COLUMNS = [...base.slice(0, at + 1), 'my_field_list', ...base.slice(at + 1)];
 //
-// then inside the row loop (line ~120), before formatValue() runs:
+// then inside the row loop (line ~130), before formatValue() runs:
 //
 //   const raw = website.coreResult.myField;
 //   serialized.my_field_list = raw ? raw.split(',') : raw;

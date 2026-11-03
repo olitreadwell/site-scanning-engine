@@ -1,7 +1,7 @@
 # Security
 
 As part of a U.S. government agency, the General Services Administration
-(GSA)'s [Technology Transformation Services (TTS)](https://gsa.gov/tts)
+(GSA)'s [Technology Transformation Services (TTS)](https://tts.gsa.gov)
 takes seriously our responsibility to protect the public's information,
 including financial and personal information, from unwarranted
 disclosure.
@@ -19,9 +19,9 @@ This website follows TTS’s
 
 The [Open Web Application Security Project (OWASP)](https://www.owasp.org/)
 curates a list of the
-[Top 10 Most Critical Web Application Security Risks](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project),
+[Top 10 Most Critical Web Application Security Risks](https://owasp.org/www-project-top-ten/),
 and
-[Using Components with Known Vulnerabilities](https://www.owasp.org/index.php/Top_10-2017_A9-Using_Components_with_Known_Vulnerabilities)
+[Using Components with Known Vulnerabilities](https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities)
 has been on it the past seven years. We can, should, and must
 keep our dependencies up-to-date.
 

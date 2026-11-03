@@ -15,7 +15,7 @@ environment:
 
 ### Deploy the Required Services in the Local Environment
 
-A `docker-compose.yml` file is provided to standup the required services
+A `docker-compose.yml` file is provided to stand up the required services
 in the local environment.
 
 #### Configure The Required Services

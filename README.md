@@ -181,8 +181,8 @@ npm run start:scan-engine
 ### Ingest Website List
 
 The Site Scanning engine relies on a list of federal domains and metadata about
-those to domains to operate. This list is ingested into the system
-from a public repository using a the [Ingest Service](libs/ingest).
+those domains to operate. This list is ingested into the system
+from a public repository using the [Ingest Service](libs/ingest).
 
 To run the ingest service do the following:
 
